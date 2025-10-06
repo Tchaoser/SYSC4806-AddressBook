@@ -1,0 +1,6 @@
+package org.sapthakeerthi.lab3_spring;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface AddressBookRepository extends CrudRepository<AddressBook, Long> {
+}

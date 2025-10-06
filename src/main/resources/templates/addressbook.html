@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Address Book</title>
+</head>
+<body>
+<h1 th:text="'Address Book #' + ${book.id}">Address Book</h1>
+
+<ul>
+    <li th:each="buddy : ${book.buddyList}">
+        <span th:text="${buddy.buddyName}">Name</span> -
+        <span th:text="${buddy.phoneNumber}">Phone</span>
+    </li>
+</ul>
+
+<p th:if="${#lists.isEmpty(book.buddyList)}">No buddies yet!</p>
+</body>
+</html>

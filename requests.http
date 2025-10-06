@@ -1,0 +1,30 @@
+### Get all address books (Sam + Steve)
+GET http://localhost:8080/addressBooks
+Accept: application/json
+
+### Rest endpoint: Get the preloaded AddressBook #1
+GET http://localhost:8080/addressBooks/1
+Accept: application/json
+
+### AddressBook #1 in Thymeleaf
+GET http://localhost:8080/addressbook/1
+Accept: text/html
+
+
+### new buddy
+POST http://localhost:8080/buddyInfoes
+Content-Type: application/json
+
+{
+  "buddyName": "Pikachu",
+  "phoneNumber": "1997545"
+}
+
+### attaching it
+POST http://localhost:8080/addressBooks/1/buddyList
+Content-Type: text/uri-list
+
+http://localhost:8080/buddyInfoes/3
+
+### deleting
+DELETE http://localhost:8080/addressBooks/1/buddyList/3
