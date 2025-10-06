@@ -1,9 +1,7 @@
 package org.sapthakeerthi.lab3_spring;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.List;
 
 public class AddressBookTest {
