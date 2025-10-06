@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main", "lab5_continuous" ]
+    branches: [ "lab5_continuous" ]
   pull_request:
-    branches: [ "main", "lab5_continuous" ]
+    branches: [ "lab5_continuous" ]
 
 jobs:
   build:
