@@ -1,11 +1,11 @@
 package org.sapthakeerthi.lab3_spring;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
+@SpringBootTest
 public class AddressBookTest {
 
     @Test

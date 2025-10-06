@@ -2,9 +2,10 @@ package org.sapthakeerthi.lab3_spring;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.util.List;
-import static org.junit.Assert.*;
+import org.springframework.boot.test.context.SpringBootTest;
 
+
+@SpringBootTest
 public class BuddyInfoTest {
 
     @Test
