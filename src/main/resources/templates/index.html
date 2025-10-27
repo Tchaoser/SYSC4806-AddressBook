@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Address Books</title>
-</head>
+<head><meta charset="UTF-8"><title>Address Books</title></head>
 <body>
 <h1>All Address Books</h1>
 
 <ul>
     <li th:each="book : ${addressBooks}">
-        <a th:href="@{/addressbook/{id}(id=${book.id})}"
-           th:text="${book.name != null ? book.name : 'AddressBook ' + ${book.id}}"></a>
+        <a th:href="@{/addressbook/{id}(id=${book.id})}">
+            AddressBook [[${book.id}]]
+        </a>
     </li>
 </ul>
 
 <h3>Create New Address Book</h3>
 <form action="/addBook" method="post">
-    <input type="text" name="name" placeholder="Book name (optional)">
-    <button type="submit">Add</button>
+    <button type="submit">Add Address Book</button>
 </form>
+
 </body>
 </html>

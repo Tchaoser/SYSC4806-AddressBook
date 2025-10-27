@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${book.name != null ? book.name : 'Address Book'}">Address Book</title>
-</head>
+<head><meta charset="UTF-8"><title>Address Book</title></head>
 <body>
-<h2 th:text="${book.name != null ? book.name : 'Address Book ' + ${book.id}}"></h2>
+<h2>AddressBook [[${book.id}]]</h2>
 
 <ul>
-    <li th:each="b : ${book.buddies}">
-        <span th:text="${b.name}"></span> - <span th:text="${b.phoneNumber}"></span>
+    <li th:each="b : ${book.buddyList}">
+        [[${b.buddyName}]] - [[${b.phoneNumber}]]
     </li>
 </ul>
 
@@ -17,9 +14,10 @@
 <form th:action="@{/addressbook/{id}/addBuddy(id=${book.id})}" method="post">
     <input type="text" name="name" placeholder="Buddy name" required>
     <input type="text" name="phoneNumber" placeholder="Phone number" required>
-    <button type="submit">Add</button>
+    <button type="submit">Add Buddy</button>
 </form>
 
-<a href="/">Back to Home</a>
+<a href="/">Back</a>
+
 </body>
 </html>

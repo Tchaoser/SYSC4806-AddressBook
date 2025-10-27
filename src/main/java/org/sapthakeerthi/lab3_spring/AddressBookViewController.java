@@ -31,7 +31,7 @@ public class AddressBookViewController {
     }
 
     @PostMapping("/addBook")
-    public String addBook(@RequestParam String name) {
+    public String addBook() {
         AddressBook book = new AddressBook();
         repo.save(book);
         return "redirect:/";
