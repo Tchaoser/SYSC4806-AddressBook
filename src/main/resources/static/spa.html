@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Book (SPA / AJAX)</title>
+
+    <script>
+        //load all AddressBooks
+        async function loadBooks() {
+            const res = await fetch('/addressBooks');
+            const data = await res.json();
+            const list = document.getElementById('books');
+            list.innerHTML = '';
+
+            if (data._embedded && data._embedded.addressBooks) {
+                data._embedded.addressBooks.forEach(book => {
+                    const href = book._links.self.href;
+                    const id = href.split("/").pop();
+
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#" onclick="loadBook('${id}')">AddressBook ${id}</a>`;
+                    list.appendChild(li);
+                });
+            }
+        }
+
+        //load buddies nd show buddy form
+        async function loadBook(id) {
+            const res = await fetch(`/addressBooks/${id}`);
+            const data = await res.json();
+            const div = document.getElementById('details');
+
+            div.innerHTML = `
+                <h3>AddressBook ${id}</h3>
+                <ul id="buddyList"></ul>
+
+                <h4>Add Buddy</h4>
+                <input id="buddyName" placeholder="Name">
+                <input id="buddyPhone" placeholder="Phone">
+                <button onclick="addBuddy(${id})">Add Buddy</button>
+            `;
+
+            const buddyLink = data._links.buddyList.href;
+            loadBuddies(buddyLink);
+        }
+
+        //load buddies list
+        async function loadBuddies(url) {
+            const res = await fetch(url);
+            const buds = await res.json();
+
+            const list = document.getElementById('buddyList');
+            list.innerHTML = '';
+
+            if (buds._embedded && buds._embedded.buddyInfoes) {
+                buds._embedded.buddyInfoes.forEach(b => {
+                    const li = document.createElement('li');
+                    li.textContent = `${b.buddyName} - ${b.phoneNumber}`;
+                    list.appendChild(li);
+                });
+            }
+        }
+
+        //add buddy
+        async function addBuddy(id) {
+            const name = document.getElementById('buddyName').value;
+            const phone = document.getElementById('buddyPhone').value;
+            if (!name || !phone) return; //just some safety
+
+            //create buddyInfo
+            const res = await fetch('/buddyInfoes', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    buddyName: name,
+                    phoneNumber: phone
+                })
+            });
+
+            const buddyUrl = res.headers.get("Location");
+
+            //link buddy to address book
+            await fetch(`/addressBooks/${id}/buddyList`, {
+                method: 'POST',
+                headers: {'Content-Type': 'text/uri-list'},
+                body: buddyUrl
+            });
+
+
+            loadBook(id); //refresh basically get request
+        }
+
+        //add new addressBook
+        async function addBook() {
+            await fetch('/addressBooks', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({})
+            });
+            loadBooks();
+        }
+        window.onload = loadBooks;
+
+    </script>
+</head>
+
+<body>
+<h1>Address Books (SPA / AJAX)</h1>
+
+<ul id="books"></ul>
+
+<h3>Create New Address Book</h3>
+<button onclick="addBook()">Add AddressBook</button>
+
+<hr>
+<div id="details"></div>
+
+</body>
+</html>

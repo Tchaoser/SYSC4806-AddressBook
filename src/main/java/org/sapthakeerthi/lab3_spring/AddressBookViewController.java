@@ -38,9 +38,7 @@ public class AddressBookViewController {
     }
 
     @PostMapping("/addressbook/{id}/addBuddy")
-    public String addBuddy(@PathVariable Long id,
-                           @RequestParam String name,
-                           @RequestParam String phoneNumber) {
+    public String addBuddy(@PathVariable Long id, @RequestParam String name, @RequestParam String phoneNumber) {
         AddressBook book = repo.findById(id).orElse(null);
         if (book != null) {
             BuddyInfo buddy = new BuddyInfo(name, phoneNumber);
