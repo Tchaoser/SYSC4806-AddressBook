@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Address Books</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
 </ul>
 
 <h3>Create New Address Book</h3>
-<form action="/addressBooks" method="post">
+<form action="/addBook" method="post">
     <input type="text" name="name" placeholder="Book name (optional)">
     <button type="submit">Add</button>
 </form>
