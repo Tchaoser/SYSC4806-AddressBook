@@ -21,4 +21,10 @@ public class AddressBookViewController {
         model.addAttribute("book", book);
         return "addressbook"; // -> addressbook.html in /templates
     }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("addressBooks", repo.findAll());
+        return "index";   // renders templates/index.html
+    }
 }
